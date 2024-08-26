@@ -1,5 +1,4 @@
 # The purpose of this is to download and downscale videos for uploading elsewhere
-# Die.
 
 import subprocess as sp
 from multiprocessing import Process
