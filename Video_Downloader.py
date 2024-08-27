@@ -12,17 +12,30 @@ class Video_Handler:
 
 
     #Method for downloading youtube videos
-    def youtube_downloader(url=None):
+    def youtube_downloader(url=None, guild=None):
         #Download folder, file input
         fpin = "Downloaded-Videos"
         #Output location
         fpout = "Converted-Videos"
 
+        servLoc = None
+
+        # For the future, each server will have its own place for the videos
+        if guild != None:
+            servLoc = str(guild)
+
         # Makes sure the folders exist
-        if not os.path.exists(fpin):
-            os.makedirs(fpin, exist_ok=True)
-        if not os.path.exists(fpout):
-            os.makedirs(fpout, exist_ok=True)
+        # Future proofing with the idea that every server will have their own folder for the sake of housekeeping.
+        if servLoc!= None:
+            if not os.path.exists(fpin):
+                os.makedirs(servLoc, fpin, exist_ok=True)
+            if not os.path.exists(fpout):
+                os.makedirs(servLoc, fpout, exist_ok=True)
+        else:
+            if not os.path.exists(fpin):
+                os.makedirs(fpin, exist_ok=True)
+            if not os.path.exists(fpout):
+                os.makedirs(fpout, exist_ok=True)
 
         # Makes sure there is a URL (Probably should be in front of the folder check, but whatever)
         if url is None:
@@ -128,6 +141,6 @@ class Video_Handler:
 
 
 # Testing section
-#Video_Handler.test("https://www.youtube.com/watch?v=LU8dH6YmkOE")
-Video_Handler.youtube_downloader("https://youtu.be/d5q1_S6lI-0")
-Video_Handler.youtube_downloader("https://youtu.be/z4E9lcuz3WU")
+#   Video_Handler.test("https://www.youtube.com/watch?v=LU8dH6YmkOE")
+#   Video_Handler.youtube_downloader("https://youtu.be/d5q1_S6lI-0")
+#   Video_Handler.youtube_downloader("https://youtu.be/z4E9lcuz3WU")
